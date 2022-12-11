@@ -18,7 +18,34 @@ func getResponseCodeInput() int {
 	return i
 }
 
+func validateEnvironmentVariable(variables []string) {
+	validated := true
+	missing := []string{}
+
+	for _, element := range variables {
+		_, bool := os.LookupEnv(element)
+
+		if bool == false {
+			validated = false
+			missing = append(missing, element)
+		}
+	}
+
+	if validated == false {
+		fmt.Println("The following environment variable(s) is/are missing:")
+		for _, missed := range missing {
+			fmt.Println("- ", missed)
+		}
+
+		os.Exit(1)
+	}
+}
+
 func main() {
+	// Environment variables.
+	environmentVariables := [3]string{"INPUT_BODY", "INPUT_URL", "INPUT_VERBOSE"}
+	validateEnvironmentVariable(environmentVariables[:])
+
 	// Environment variables as input.
 	body := os.Getenv("INPUT_BODY")
 	url := os.Getenv("INPUT_URL")
