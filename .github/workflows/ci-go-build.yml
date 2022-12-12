@@ -3,10 +3,14 @@ name: 'CI - Go Build'
 on:
   push:
     branches: [main]
+    paths:
+      - main.go
+
   workflow_dispatch:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
