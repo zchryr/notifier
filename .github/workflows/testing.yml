@@ -36,9 +36,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Webhook
-        run: |
-          curl --request POST '${{ secrets.WEBHOOK_URL }}' \
-            --data "${{ toJSON(needs) }}" \
-            --header "Source: GitHub Actions" \
-            --header "Content-Type: application/json"
+      - name: Action Testing
+        uses: zchryr/build-notifier-action@main
+        with:
+          body: 'Test'
+          url: ${{ secrets.WEBHOOK_URL }}
+          response_code: 201
+      # - name: Webhook
+      #   run: |
+      #     curl --request POST '${{ secrets.WEBHOOK_URL }}' \
+      #       --data "${{ toJSON(needs) }}" \
+      #       --header "Source: GitHub Actions" \
+      #       --header "Content-Type: application/json"
