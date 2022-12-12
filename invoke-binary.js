@@ -3,7 +3,6 @@ const os = require('os');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const { exec } = require('node:child_process');
-const core = require('@actions/core');
 
 async function getReleaseBinaryURL(os, arch) {
   if (arch === 'x64') {
@@ -102,12 +101,8 @@ try {
   const url = process.env.URL;
   const response = process.env.RESPONSE_CODE;
 
-  console.log(`body: ${body}`);
-  console.log(`url: ${url}`);
-  console.log(`response: ${response}`);
-
-  // const binary = await chooseBinary();
-  // runBinary(binary, 'send -h');
+  const binary = await chooseBinary();
+  runBinary(binary, `--url ${url} --body ${body} --response ${response}`);
 } catch (error) {
   core.setFailed(error.message);
 }
