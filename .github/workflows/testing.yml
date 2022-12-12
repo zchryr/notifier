@@ -1,19 +1,13 @@
 name: 'Testing'
 
 on:
-#   push:
-#     branches: [main]
-#   pull_request:
-#     branches: [main]
-#   schedule:
-#     - cron: '0 0 * * MON' # Every Monday.
   workflow_dispatch: # Manual trigger.
 
 jobs:
   one:
     name: one
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: test
         run: |
@@ -29,15 +23,14 @@ jobs:
           echo "test"
   fail:
     name: fail
-    runs-on: ubuntu-latets
-    
+    runs-on: ubuntu-latest
+
     steps:
       - name: fail
-        if: ${{ matrix.language == 'python' }}
         run: exit 1
 
   notification:
-    needs: [ one, two, fail ]
+    needs: [one, two, fail]
     if: always()
     name: Send Build Notification
     runs-on: ubuntu-latest
