@@ -21,7 +21,12 @@ runs:
         export INPUT_RESPONSE_CODE=${{ inputs.RESPONSE_CODE }}
       shell: bash
 
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19.3
+
     - name: Run Build Notifier
       run: |
-        ./build-notifier
+        go run ./main.go
       shell: bash
