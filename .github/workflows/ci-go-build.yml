@@ -1,4 +1,4 @@
-name: 'CI - GoReleaser'
+name: 'CI - Go Build'
 
 on:
   push:
@@ -11,11 +11,12 @@ permissions:
   packages: write
 
 jobs:
-  goreleaser:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: ['windows', 'macos', 'linux']
+        os: ['windows', 'darwin', 'linux']
         arch: ['arm64', 'amd64']
 
     steps:
