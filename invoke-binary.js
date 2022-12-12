@@ -98,13 +98,9 @@ function runBinary(binary, args) {
 }
 
 try {
-  const body = core.getInput('body');
-  const url = core.getInput('url');
-  const response = core.getInput('response_code');
-
-  if (!body) {
-    console.log(':(');
-  }
+  const body = process.env.BODY;
+  const url = process.env.URL;
+  const response = process.env.RESPONSE_CODE;
 
   console.log(`body: ${body}`);
   console.log(`url: ${url}`);
