@@ -1,11 +1,8 @@
 // https://full-stack.blend.com/how-we-write-github-actions-in-go.html
 const os = require('os');
 const fetch = require('node-fetch');
-// import fetch from 'node-fetch';
 const fs = require('fs');
-// import fs from 'fs';
 const { exec } = require('node:child_process');
-// import { exec } from 'node:child_process';
 const core = require('@actions/core');
 const github = require('@actions/github');
 
@@ -96,7 +93,7 @@ function runBinary(binary, args) {
 try {
   const body = core.getInput('body');
   const url = core.getInput('url');
-  const response = core.getInput('response');
+  const response = core.getInput('response_code');
 
   console.log(`body: ${body}`);
   console.log(`url: ${url}`);
