@@ -102,7 +102,10 @@ try {
   const url = core.getInput('url');
   const response = core.getInput('response_code');
 
-  console.log(body);
+  if (!body) {
+    console.log(':(');
+  }
+
   console.log(`body: ${body}`);
   console.log(`url: ${url}`);
   console.log(`response: ${response}`);
