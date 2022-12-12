@@ -94,13 +94,13 @@ try {
   const body = core.getInput('body');
   const url = core.getInput('url');
   const response = core.getInput('response');
+
+  console.log('body: ' + body);
+  console.log('url:' + url);
+  console.log('response: ' + response);
+
+  const binary = await chooseBinary();
+  runBinary(binary, 'send -h');
 } catch (error) {
   core.setFailed(error.message);
 }
-
-const binary = await chooseBinary();
-
-console.log('body: ' + body);
-console.log('url:' + url);
-console.log('response: ' + response);
-runBinary(binary, 'send -h');
