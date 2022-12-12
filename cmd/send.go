@@ -43,6 +43,7 @@ func send(body string, url string, response string) {
 	response_code, err := strconv.Atoi(response)
 
 	if err != nil {
+		fmt.Println("panic after str -> int")
 		panic(err)
 	}
 
@@ -51,6 +52,7 @@ func send(body string, url string, response string) {
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
 
 	if err != nil {
+		fmt.Println("panic after create http.NewRequest")
 		panic(err)
 	}
 
