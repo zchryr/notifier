@@ -16,3 +16,4 @@
 
 # Main.go binary
 ./main.go
+dist/
