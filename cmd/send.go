@@ -18,6 +18,9 @@ var sendCmd = &cobra.Command{
 	Short: "Send data.",
 	Long: `Send data to an endpoint.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		// fmt.Println(cmd.Flags().Count())
+		// TODO not handling when no args are passed, somehow.
+
 		body, _ := cmd.Flags().GetString("body")
 		url, _ := cmd.Flags().GetString("url")
 

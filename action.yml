@@ -13,20 +13,23 @@ inputs:
     required: true
 
 runs:
-  using: 'composite'
-  steps:
-    - run: |
-        export INPUT_BODY=${{ inputs.body }}
-        export INPUT_URL=${{ inputs.url }}
-        export INPUT_RESPONSE_CODE=${{ inputs.RESPONSE_CODE }}
-      shell: bash
+  using: 'node16'
+  main: 'invoke-binary.js'
+# runs:
+#   using: 'composite'
+#   steps:
+#     - run: |
+#         export INPUT_BODY=${{ inputs.body }}
+#         export INPUT_URL=${{ inputs.url }}
+#         export INPUT_RESPONSE_CODE=${{ inputs.RESPONSE_CODE }}
+#       shell: bash
 
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.19.3
+#     - name: Set up Go
+#       uses: actions/setup-go@v3
+#       with:
+#         go-version: 1.19.3
 
-    - name: Run Build Notifier
-      run: |
-        go run ./main.go
-      shell: bash
+#     - name: Run Build Notifier
+#       run: |
+#         go run ./main.go
+#       shell: bash
