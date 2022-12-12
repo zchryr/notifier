@@ -1,10 +1,13 @@
 // https://full-stack.blend.com/how-we-write-github-actions-in-go.html
-import os from 'os';
-import fetch from 'node-fetch';
-import fs from 'fs';
-import { exec } from 'node:child_process';
-import core from '@actions/core';
-// import { github } from '@actions/github';
+const os = require('os');
+const fetch = require('node-fetch');
+// import fetch from 'node-fetch';
+const fs = require('fs');
+// import fs from 'fs';
+const { exec } = require('node:child_process');
+// import { exec } from 'node:child_process';
+const core = require('@actions/core');
+const github = require('@actions/github');
 
 async function getReleaseBinaryURL(os, arch) {
   if (arch === 'x64') {
@@ -95,12 +98,12 @@ try {
   const url = core.getInput('url');
   const response = core.getInput('response');
 
-  console.log('body: ' + body);
-  console.log('url:' + url);
-  console.log('response: ' + response);
+  console.log(`body: ${body}`);
+  console.log(`url: ${url}`);
+  console.log(`response: ${response}`);
 
-  const binary = await chooseBinary();
-  runBinary(binary, 'send -h');
+  // const binary = await chooseBinary();
+  // runBinary(binary, 'send -h');
 } catch (error) {
   core.setFailed(error.message);
 }
