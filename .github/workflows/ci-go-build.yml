@@ -44,4 +44,4 @@ jobs:
         with:
           tag: ${{ github.ref }}
           file: bin/${{ matrix.os }}-${{ matrix.arch }}
-          asset_name: $tag-${{ matrix.os }}-${{ matrix.arch }}
+          asset_name: ${{ GITHUB_REPOSITORY }}_$tag-${{ matrix.os }}-${{ matrix.arch }}
