@@ -56,7 +56,7 @@ async function downloadFile(url, fileName) {
     res.body.pipe(fileStream);
     res.body.on('error', reject);
     fileStream.on('finish', resolve);
-    console.log(`Download completed. File: ${process.cwd()}/${fileName}`);
+    // console.log(`Download completed. File: ${process.cwd()}/${fileName}`);
   }).then();
 
   return process.cwd() + '/' + fileName;
