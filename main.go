@@ -43,19 +43,13 @@ func validateEnvironmentVariable(variables []string) {
 
 func main() {
 	// Environment variables.
-	environmentVariables := [3]string{"INPUT_BODY", "INPUT_URL", "INPUT_VERBOSE"}
+	environmentVariables := [2]string{"INPUT_BODY", "INPUT_URL"}
 	validateEnvironmentVariable(environmentVariables[:])
 
 	// Environment variables as input.
 	body := os.Getenv("INPUT_BODY")
 	url := os.Getenv("INPUT_URL")
 	response_code := getResponseCodeInput()
-
-	// Checking for verbose mode.
-	verbose_value, _ := os.LookupEnv("INPUT_VERBOSE")
-	if verbose_value == "true" {
-		fmt.Println("Verbose output enabled.")
-	}
 
 	// HTTP client.
 	client := http.Client{}
@@ -77,8 +71,6 @@ func main() {
 		fmt.Println("Something is wrong :-(")
 		panic(err)
 	} else {
-		if verbose_value == "true" {
-			fmt.Println("Request sent successfully!")
-		}
+		fmt.Println("Request sent successfully!")
 	}
 }
