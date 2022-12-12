@@ -3,7 +3,7 @@ name: 'CI - GoReleaser'
 on:
   push:
     tags:
-      - *
+      - '*'
 
 permissions:
   contents: write
