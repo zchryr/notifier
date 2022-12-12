@@ -51,11 +51,12 @@ async function getReleaseBinaryURL(os, arch) {
 
 async function downloadFile(url, fileName) {
   const res = await fetch(url);
-  const fileStream = fs.createWriteStream(process.cwd() + fileName);
+  const fileStream = fs.createWriteStream(process.cwd() + '/' + fileName);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);
     res.body.on('error', reject);
     fileStream.on('finish', resolve);
+    console.log(`Download completed. File: ${process.cwd()}/${fileName}`);
   }).then();
 
   return process.cwd() + '/' + fileName;
