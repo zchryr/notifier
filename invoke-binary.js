@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const { exec } = require('node:child_process');
 const core = require('@actions/core');
-const github = require('@actions/github');
 
 async function getReleaseBinaryURL(os, arch) {
   if (arch === 'x64') {
@@ -49,9 +48,17 @@ async function getReleaseBinaryURL(os, arch) {
   }
 }
 
-async function downloadFile(url, fileName) {
+async function downloadFile(url, fileName, platform) {
+  var slash = '';
+
+  if (platform === 'win32') {
+    slash = '\\';
+  } else if (platform === 'linux' || platform === 'darwin') {
+    slash = '/';
+  }
+
   const res = await fetch(url);
-  const fileStream = fs.createWriteStream(process.cwd() + '/' + fileName);
+  const fileStream = fs.createWriteStream(process.cwd() + slash + fileName);
   await new Promise((resolve, reject) => {
     res.body.pipe(fileStream);
     res.body.on('error', reject);
@@ -67,7 +74,7 @@ async function chooseBinary() {
   const arch = os.arch();
 
   const url = await getReleaseBinaryURL(platform, arch);
-  const binary = await downloadFile(url, 'build-notifier-action');
+  const binary = await downloadFile(url, 'build-notifier-action', platform);
 
   // Make executable.
   if (platform === 'win32') {
@@ -95,6 +102,7 @@ try {
   const url = core.getInput('url');
   const response = core.getInput('response_code');
 
+  console.log(body);
   console.log(`body: ${body}`);
   console.log(`url: ${url}`);
   console.log(`response: ${response}`);
