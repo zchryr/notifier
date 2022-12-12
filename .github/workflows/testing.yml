@@ -39,12 +39,6 @@ jobs:
       - name: Action Testing
         uses: zchryr/build-notifier-action@main
         with:
-          body: 'Test'
+          body: ${{ toJSON(needs) }}
           url: ${{ secrets.WEBHOOK_URL }}
           response_code: 201
-      # - name: Webhook
-      #   run: |
-      #     curl --request POST '${{ secrets.WEBHOOK_URL }}' \
-      #       --data "${{ toJSON(needs) }}" \
-      #       --header "Source: GitHub Actions" \
-      #       --header "Content-Type: application/json"
