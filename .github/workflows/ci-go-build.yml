@@ -37,7 +37,6 @@ jobs:
 
           mkdir bin
           go build -o bin/${{ matrix.os }}-${{ matrix.arch }} main.go
-          chmod +x bin/${{ matrix.os }}-${{ matrix.arch }}
 
       - name: Upload files to a GitHub release
         uses: svenstaro/upload-release-action@2.3.0
