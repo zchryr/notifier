@@ -17,7 +17,7 @@ runs:
   steps:
     - uses: actions/checkout@v3
 
-    - run:
+    - run: |
       echo body ${{ inputs.body }}
       echo url ${{ inputs.url }}
       echo response_code ${{ inputs.response_code }}
