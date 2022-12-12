@@ -1,7 +1,7 @@
 // https://full-stack.blend.com/how-we-write-github-actions-in-go.html
 const os = require('os');
-const fetch = require('node-fetch');
-// import fetch from 'node-fetch';
+// const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 const fs = require('fs');
 // import fs from 'fs';
 const { exec } = require('node:child_process');
