@@ -17,3 +17,5 @@
 # Main.go binary
 ./main.go
 dist/
+
+node_modules/
