@@ -22,6 +22,7 @@ runs:
         echo body "${{ inputs.body }}"
         echo url "${{ inputs.url }}"
         echo response_code "${{ inputs.response_code }}"
+      shell: bash
 
     - name: Setup NodeJS
       uses: actions/setup-node@v3
