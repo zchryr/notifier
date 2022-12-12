@@ -101,7 +101,7 @@ try {
   const url = process.env.URL;
   const response = process.env.RESPONSE_CODE;
 
-  const binary = chooseBinary().then(
+  chooseBinary().then((binary) =>
     runBinary(binary, `--url ${url} --body ${body} --response ${response}`)
   );
 } catch (error) {
