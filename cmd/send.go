@@ -23,14 +23,7 @@ var sendCmd = &cobra.Command{
 
 		body, _ := cmd.Flags().GetString("body")
 		url, _ := cmd.Flags().GetString("url")
-
-		// Convert flag from string to int.
-		response_flag, _ := cmd.Flags().GetString("response")
-		response, err := strconv.Atoi(response_flag)
-
-		if err != nil {
-			panic(err)
-		}
+		response, _ := cmd.Flags().GetString("response")
 
 		send(body, url, response)
 	},
@@ -41,12 +34,18 @@ func init() {
 
 	sendCmd.PersistentFlags().String("body", "", "The data that should be sent in the body of the message.")
 	sendCmd.PersistentFlags().String("url", "", "The URL where the data should be sent to.")
-	sendCmd.PersistentFlags().String("response", "", "The URL where the data should be sent to.")
+	sendCmd.PersistentFlags().String("response", "", "The expected successful response code from the server.")
 
 	sendCmd.MarkFlagsRequiredTogether("body", "url", "response")
 }
 
-func send(body string, url string, response int) {
+func send(body string, url string, response string) {
+	response_code, err := strconv.Atoi(response)
+
+	if err != nil {
+		panic(err)
+	}
+
 	// HTTP client.
 	client := http.Client{}
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(body)))
@@ -63,7 +62,7 @@ func send(body string, url string, response int) {
 	resp, err := client.Do(req)
 
 	// Error handling.
-	if resp.StatusCode != response {
+	if resp.StatusCode != response_code {
 		fmt.Println("Server responded with status code: ", resp.StatusCode)
 		panic(err)
 	} else {
