@@ -23,11 +23,12 @@ runs:
     - name: Install Dependencies
       run: |
         npm install
+      shell: bash
 
     - name: Run Action
       run: |
         node invoke-binary.js
-
+      shell: bash
 # runs:
 #   using: 'composite'
 #   steps:
