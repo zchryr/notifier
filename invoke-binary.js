@@ -102,7 +102,10 @@ try {
   const response = process.env.RESPONSE_CODE;
 
   chooseBinary().then((binary) =>
-    runBinary(binary, `--url ${url} --body "${body}" --response ${response}`)
+    runBinary(
+      binary,
+      `send --url ${url} --body "${body}" --response ${response}`
+    )
   );
 } catch (error) {
   console.log(`Error: ${error}`);
