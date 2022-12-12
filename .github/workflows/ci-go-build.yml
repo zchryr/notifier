@@ -43,4 +43,5 @@ jobs:
         uses: svenstaro/upload-release-action@2.3.0
         with:
           tag: ${{ github.ref }}
-          file: bin/${{ matrix.os }}-${{ matrix.arch }}-v$tag
+          file: bin/${{ matrix.os }}-${{ matrix.arch }}
+          asset_name: ${{ matrix.os }}-${{ matrix.arch }}-$tag
