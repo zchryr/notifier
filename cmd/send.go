@@ -40,7 +40,7 @@ func init() {
 	sendCmd.PersistentFlags().String("url", "", "The URL where the data should be sent to.")
 	sendCmd.PersistentFlags().String("response", "", "The URL where the data should be sent to.")
 
-	sendCmd.MarkFlagsRequiredTogether("body", "url")
+	sendCmd.MarkFlagsRequiredTogether("body", "url", "response")
 }
 
 func send(body string, url string, response int) {
