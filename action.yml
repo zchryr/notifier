@@ -1,0 +1,32 @@
+name: 'Build Notifier'
+description: 'This GitHub Action will allow you to take data and send it somewhere.'
+
+inputs:
+  body:
+    description: 'The data to send.'
+    required: true
+  url:
+    description: 'The URL you want to send the data to.'
+    required: true
+  verbose:
+    description: 'Verbose logging. Valid values: "true" or "false".'
+    required: false
+    default: 'false'
+  response_code:
+    description: 'The expected successful response code from the server to send the data to.'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        export INPUT_BODY=${{ inputs.body }}
+        export INPUT_URL=${{ inputs.url }}
+        export INPUT_VERBOSE=${{ inputs.verbose }}
+        export INPUT_RESPONSE_CODE=${{ inputs.RESPONSE_CODE }}
+      shell: bash
+
+    - name: Run Build Notifier
+      run: |
+        ./build-notifier
+      shell: bash
