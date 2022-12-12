@@ -99,4 +99,8 @@ try {
 }
 
 const binary = await chooseBinary();
+
+console.log('body: ' + body);
+console.log('url:' + url);
+console.log('response: ' + response);
 runBinary(binary, 'send -h');
