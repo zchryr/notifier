@@ -104,7 +104,7 @@ try {
   chooseBinary().then((binary) =>
     runBinary(
       binary,
-      `send --url ${url} --body "${body}" --response "${response}"`
+      `send --url "${url}" --body "${body}" --response "${response}"`
     )
   );
 } catch (error) {
