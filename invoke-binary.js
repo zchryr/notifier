@@ -101,8 +101,9 @@ try {
   const url = process.env.URL;
   const response = process.env.RESPONSE_CODE;
 
-  const binary = await chooseBinary();
-  runBinary(binary, `--url ${url} --body ${body} --response ${response}`);
+  const binary = chooseBinary().then(
+    runBinary(binary, `--url ${url} --body ${body} --response ${response}`)
+  );
 } catch (error) {
   core.setFailed(error.message);
 }
