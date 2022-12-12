@@ -3,8 +3,8 @@ import os from 'os';
 import fetch from 'node-fetch';
 import fs from 'fs';
 import { exec } from 'node:child_process';
-const core = require('@actions/core');
-const github = require('@actions/github');
+import core from '@actions/core';
+// import { github } from '@actions/github';
 
 async function getReleaseBinaryURL(os, arch) {
   if (arch === 'x64') {
@@ -56,7 +56,6 @@ async function downloadFile(url, fileName) {
     res.body.pipe(fileStream);
     res.body.on('error', reject);
     fileStream.on('finish', resolve);
-    console.log('GH Action binary download completed!');
   }).then();
 
   return process.cwd() + '/' + fileName;
