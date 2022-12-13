@@ -26,19 +26,28 @@ async function getReleaseBinaryURL(os, arch) {
     if (os === 'darwin') {
       for (var element of data['assets']) {
         if (element['name'].endsWith(`darwin-${arch}`)) {
-          return element['browser_download_url'];
+          return {
+            url: element['browser_download_url'],
+            version: data['tag_name'],
+          };
         }
       }
     } else if (os === 'linux') {
       for (var element of data['assets']) {
         if (element['name'].endsWith('linux-amd64')) {
-          return element['browser_download_url'];
+          return {
+            url: element['browser_download_url'],
+            version: data['tag_name'],
+          };
         }
       }
     } else if (os === 'win32') {
       for (var element of data['assets']) {
         if (element['name'].endsWith('windows-amd64')) {
-          return element['browser_download_url'];
+          return {
+            url: element['browser_download_url'],
+            version: data['tag_name'],
+          };
         }
       }
     }
@@ -47,7 +56,7 @@ async function getReleaseBinaryURL(os, arch) {
   }
 }
 
-async function downloadFile(url, fileName, platform) {
+async function downloadFile(url, fileName, platform, version) {
   var slash = '';
 
   if (platform === 'win32') {
@@ -62,7 +71,10 @@ async function downloadFile(url, fileName, platform) {
     res.body.pipe(fileStream);
     res.body.on('error', reject);
     fileStream.on('finish', resolve);
-    // console.log(`Download completed. File: ${process.cwd()}/${fileName}`);
+    console.log(
+      `Download completed. File: ${process.cwd()}${slash}${fileName}`
+    );
+    console.log(`Version downloaded: ${version}`);
   }).then();
 
   return process.cwd() + '/' + fileName;
@@ -72,8 +84,13 @@ async function chooseBinary() {
   const platform = os.platform();
   const arch = os.arch();
 
-  const url = await getReleaseBinaryURL(platform, arch);
-  const binary = await downloadFile(url, 'build-notifier-action', platform);
+  const { url, version } = await getReleaseBinaryURL(platform, arch);
+  const binary = await downloadFile(
+    url,
+    'build-notifier-action',
+    platform,
+    version
+  );
 
   // Make executable.
   if (platform === 'win32') {
