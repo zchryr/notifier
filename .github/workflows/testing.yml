@@ -45,4 +45,6 @@ jobs:
           url: ${{ secrets.WEBHOOK_URL }}
           response_code: 201
           repo: ${{ github.repository }}
-          workflow: ${{ github.workflow }}
+          workflow: $WORKFLOW
+        env:
+          WORKFLOW: ${{ github.workflow }}
