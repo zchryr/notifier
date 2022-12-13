@@ -13,6 +13,7 @@ jobs:
         run: |
           echo "test"
           echo workflow: ${{ github.workflow }}
+          echo repository: ${{ github.repository }}
 
   two:
     name: two
@@ -38,8 +39,10 @@ jobs:
 
     steps:
       - name: Action Testing
-        uses: zchryr/build-notifier-action@v0.0.4
+        uses: zchryr/build-notifier-action@v1.0.11
         with:
           body: ${{ toJSON(needs) }}
           url: ${{ secrets.WEBHOOK_URL }}
           response_code: 201
+          repo: ${{ github.repository }}
+          workflow: ${{ github.workflow }}
