@@ -1,5 +1,8 @@
 name: 'Build Notifier'
 description: 'This GitHub Action will allow you to take data and send it somewhere.'
+branding:
+  icon: 'check'
+  color: 'gray-dark'
 
 inputs:
   body:
