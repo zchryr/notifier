@@ -12,8 +12,8 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "build-notifier-action",
-	Short: "Send data to endpoints.",
-	Long: `This CLI tool allows you to send data to an endpoint.`,
+	Short: "Send text to endpoints.",
+	Long: `This CLI tool to be used in Git CI/CD to send text from within a pipeline to an endpoint.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
