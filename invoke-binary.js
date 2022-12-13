@@ -117,11 +117,12 @@ try {
   const body = process.env.BODY;
   const url = process.env.URL;
   const response = process.env.RESPONSE_CODE;
+  const repo = process.env.REPO;
 
   chooseBinary().then((binary) =>
     runBinary(
       binary,
-      `send --url '${url}' --body '${body}' --response '${response}'`
+      `send --url '${url}' --body '${body}' --response '${response}' --repo ${repo}`
     )
   );
 } catch (error) {

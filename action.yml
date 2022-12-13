@@ -14,6 +14,9 @@ inputs:
   response_code:
     description: 'The expected successful response code from the server to send the data to.'
     required: true
+  repo:
+    description: 'Name of the GitHub repo that this action will be operating in.'
+    required: true
 
 runs:
   using: 'composite'
@@ -41,3 +44,4 @@ runs:
         BODY: ${{ inputs.body }}
         URL: ${{ inputs.url }}
         RESPONSE_CODE: ${{ inputs.response_code }}
+        REPO: ${{ inputs.repo }}
