@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/spf13/cobra"
@@ -64,8 +65,11 @@ func send(body string, url string, response string) {
 	// Error handling.
 	if resp.StatusCode != response_code {
 		fmt.Println("Server responded with status code:", resp.StatusCode)
-		panic(err)
-	} else {
+		fmt.Println("Expected response code:", response_code)
+		os.Exit(1)
+	} else if resp.StatusCode == response_code {
 		fmt.Println("Request sent successfully!")
+	} else if err != nil {
+		panic(err)
 	}
 }
