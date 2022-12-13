@@ -30,7 +30,7 @@ runs:
 
     - name: Install Dependencies
       run: |
-        npm install
+        npm install --silent
       shell: bash
 
     - name: Run Action
