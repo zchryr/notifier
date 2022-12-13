@@ -12,6 +12,7 @@ jobs:
       - name: test
         run: |
           echo "test"
+          echo workflow: ${{ github.workflow }}
 
   two:
     name: two
