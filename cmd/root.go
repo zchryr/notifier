@@ -13,7 +13,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "build-notifier-action",
 	Short: "Send text to endpoints.",
-	Long: `This CLI tool to be used in Git CI/CD to send text from within a pipeline to an endpoint.`,
+	Long: `This CLI tool to be used in GitHub Actions to send text from within a workflow to an endpoint.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

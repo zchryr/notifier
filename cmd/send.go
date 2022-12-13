@@ -25,9 +25,10 @@ var sendCmd = &cobra.Command{
 		body, _ := cmd.Flags().GetString("body")
 		url, _ := cmd.Flags().GetString("url")
 		response, _ := cmd.Flags().GetString("response")
-		repo, _ := cmd.Flags().GetString("git_repo")
+		repo, _ := cmd.Flags().GetString("repo")
+		workflow, _ := cmd.Flags().GetString("workflow")
 
-		send(body, url, response, repo)
+		send(body, url, response, repo, workflow)
 	},
 }
 
@@ -37,12 +38,13 @@ func init() {
 	sendCmd.PersistentFlags().String("body", "", "The data that should be sent in the body of the message.")
 	sendCmd.PersistentFlags().String("url", "", "The URL where the data should be sent to.")
 	sendCmd.PersistentFlags().String("response", "", "The expected successful response code from the server.")
-	sendCmd.PersistentFlags().String("repo", "", "Name of the Git repo this CLI is used in.")
+	sendCmd.PersistentFlags().String("repo", "", "Name of the GitHub repo this CLI is used in.")
+	sendCmd.PersistentFlags().String("workflow", "", "Name of the GitHub workflow this CLI is used in.")
 
-	sendCmd.MarkFlagsRequiredTogether("body", "url", "response")
+	sendCmd.MarkFlagsRequiredTogether("body", "url", "response", "repo", "workflow")
 }
 
-func send(body string, url string, response string, repo string) {
+func send(body string, url string, response string, repo string, workflow string) {
 	response_code, err := strconv.Atoi(response)
 
 	if err != nil {
@@ -62,6 +64,7 @@ func send(body string, url string, response string, repo string) {
 		"Content-Type": {"application/json"},
 		"User-Agent": {"https://github.com/zchryr/build-notifier-action"},
 		"repo": {repo},
+		"workflow": {workflow},
 	}
 	resp, err := client.Do(req)
 
