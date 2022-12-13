@@ -123,7 +123,7 @@ try {
   chooseBinary().then((binary) =>
     runBinary(
       binary,
-      `send --url '${url}' --body '${body}' --response '${response}' --repo ${repo} --workflow ${workflow}`
+      `send --url '${url}' --body '${body}' --response '${response}' --repo '${repo}' --workflow '${workflow}'`
     )
   );
 } catch (error) {
