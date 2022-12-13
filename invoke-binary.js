@@ -74,7 +74,7 @@ async function downloadFile(url, fileName, platform, version) {
     console.log(
       `Download completed. File: ${process.cwd()}${slash}${fileName}`
     );
-    console.log(`Version downloaded: ${version}`);
+    console.log(`GH Action release version downloaded: ${version}`);
   }).then();
 
   return process.cwd() + '/' + fileName;
