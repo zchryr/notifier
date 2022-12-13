@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Action Testing
-        uses: zchryr/build-notifier-action@v0.0.2
+        uses: zchryr/build-notifier-action@v0.0.4
         with:
           body: ${{ toJSON(needs) }}
           url: ${{ secrets.WEBHOOK_URL }}
