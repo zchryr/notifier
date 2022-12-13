@@ -18,9 +18,8 @@ inputs:
     description: 'Name of the GitHub repo that this action will be operating in.'
     required: true
   workflow:
-    description: 'The name of the GitHub workflow this action is running from.'
-    required: false
-    default: ${{ github.workflow }}
+    description: 'The name of the GitHub workflow this action is running from. Consider ${{ github.workflow }}'
+    required: true
 
 runs:
   using: 'composite'
