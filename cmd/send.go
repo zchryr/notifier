@@ -25,9 +25,9 @@ var sendCmd = &cobra.Command{
 		body, _ := cmd.Flags().GetString("body")
 		url, _ := cmd.Flags().GetString("url")
 		response, _ := cmd.Flags().GetString("response")
-		git_repo, _ := cmd.Flags().GetString("git_repo")
+		repo, _ := cmd.Flags().GetString("git_repo")
 
-		send(body, url, response, git_repo)
+		send(body, url, response, repo)
 	},
 }
 
@@ -37,12 +37,12 @@ func init() {
 	sendCmd.PersistentFlags().String("body", "", "The data that should be sent in the body of the message.")
 	sendCmd.PersistentFlags().String("url", "", "The URL where the data should be sent to.")
 	sendCmd.PersistentFlags().String("response", "", "The expected successful response code from the server.")
-	sendCmd.PersistentFlags().String("git_repo", "", "Name of the Git repo this CLI is used in.")
+	sendCmd.PersistentFlags().String("repo", "", "Name of the Git repo this CLI is used in.")
 
 	sendCmd.MarkFlagsRequiredTogether("body", "url", "response")
 }
 
-func send(body string, url string, response string, git_repo string) {
+func send(body string, url string, response string, repo string) {
 	response_code, err := strconv.Atoi(response)
 
 	if err != nil {
@@ -61,7 +61,7 @@ func send(body string, url string, response string, git_repo string) {
 	req.Header = http.Header{
 		"Content-Type": {"application/json"},
 		"User-Agent": {"https://github.com/zchryr/build-notifier-action"},
-		"Git_Repo": {git_repo},
+		"repo": {repo},
 	}
 	resp, err := client.Do(req)
 
