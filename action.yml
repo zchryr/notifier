@@ -18,7 +18,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Action Repo
+      uses: actions/checkout@v3
+      with:
+        repository: zchryr/build-notifier-action
 
     - name: Setup NodeJS
       uses: actions/setup-node@v3
