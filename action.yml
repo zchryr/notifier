@@ -19,7 +19,8 @@ inputs:
     required: true
   workflow:
     description: >
-      "The name of the GitHub workflow this action is running from. Consider ${{ github.workflow }}"
+      'The name of the GitHub workflow this action is running from. 
+       GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables'
     required: true
 
 runs:
