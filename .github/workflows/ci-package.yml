@@ -1,0 +1,32 @@
+name: 'CI - Package'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.js'
+  workflow_dispatch: # Manual.
+
+jobs:
+  package:
+    name: Package distribution files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install packages
+        run: npm install
+
+      - name: Package
+        run: npm run package
+
+      - name: Commit
+        run: |
+          git config --global user.name "GitHub Actions"
+          git add dist/
+          git commit -m "Update dist" || echo "No changes to commit"
+          git push origin main
