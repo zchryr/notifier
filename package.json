@@ -1,5 +1,27 @@
 {
+  "name": "notifier",
+  "version": "0.0.1",
+  "description": "GitHub Action to take data and send it somewhere.",
+  "main": "index.js",
+  "scripts": {
+    "package": "ncc build ./main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zchryr/notifier.git"
+  },
+  "author": "Zachary R",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zchryr/notifier/issues"
+  },
+  "homepage": "https://github.com/zchryr/notifier#readme",
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
   }
 }

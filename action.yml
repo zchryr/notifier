@@ -5,48 +5,16 @@ branding:
   color: 'gray-dark'
 
 inputs:
-  body:
-    description: 'The data to send.'
+  input:
+    description: 'The JSON user input'
     required: true
   url:
-    description: 'The URL you want to send the data to.'
+    description: 'The endpoint URL'
     required: true
-  response_code:
-    description: 'The expected successful response code from the server to send the data to.'
-    required: true
-  repo:
-    description: 'Name of the GitHub repo that this action will be operating in.'
-    required: true
-  workflow:
-    description: >
-      'The name of the GitHub workflow this action is running from. 
-       GitHub docs: https://docs.github.com/en/actions/learn-github-actions/environment-variables'
-    required: true
+outputs:
+  success:
+    description: 'Indicates if the data was sent successfully'
 
 runs:
-  using: 'composite'
-  steps:
-    - name: Checkout Action Repo
-      uses: actions/checkout@v3
-      with:
-        repository: zchryr/build-notifier-action
-
-    - name: Setup NodeJS
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install Dependencies
-      run: |
-        npm install --silent
-      shell: bash
-
-    - name: Run Action
-      run: |
-        node invoke-binary.js
-      shell: bash
-      env:
-        BODY: ${{ inputs.body }}
-        URL: ${{ inputs.url }}
-        RESPONSE_CODE: ${{ inputs.response_code }}
-        REPO: ${{ inputs.repo }}
+  using: 'node20'
+  main: 'index.js'
