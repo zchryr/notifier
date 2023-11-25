@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - 'index.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'action.yml'
+      - '.github/workflows/ci-package.yml'
   workflow_dispatch: # Manual.
 
 jobs:
