@@ -4,7 +4,7 @@
   "description": "GitHub Action to take data and send it somewhere.",
   "main": "index.js",
   "scripts": {
-    "package": "ncc build ./main.js"
+    "package": "ncc build ./index.js"
   },
   "repository": {
     "type": "git",
