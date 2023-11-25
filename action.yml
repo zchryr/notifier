@@ -11,6 +11,11 @@ inputs:
   url:
     description: 'The endpoint URL'
     required: true
+  response_code:
+    description: 'The expected response code from the webhook'
+    required: false
+    default: '200'
+
 outputs:
   success:
     description: 'Indicates if the data was sent successfully'
