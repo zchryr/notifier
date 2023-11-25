@@ -37395,42 +37395,49 @@ module.exports = JSON.parse('{"application/1d-interleaved-parityfec":{"source":"
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(2186); // Importing the core module from the GitHub Actions toolkit
+const core = __nccwpck_require__(2186); // Importing core module from GitHub Actions toolkit
 const axios = __nccwpck_require__(8757); // Importing axios for making HTTP requests
-const github = __nccwpck_require__(5438); // Importing GitHub toolkit to access repo and workflow information
+const github = __nccwpck_require__(5438); // Importing GitHub toolkit for context information
 
 async function run() {
   try {
     // Reading input parameters from the workflow file
     const userInput = core.getInput('input'); // User-provided JSON input
-    const url = core.getInput('url'); // The URL to send the data to
+    const url = core.getInput('url'); // URL to which data is sent
+    const expectedResponseCode = core.getInput('response_code'); // Expected HTTP response code
 
     // Validate user input is valid JSON
     let inputJson;
     try {
-      inputJson = JSON.parse(userInput);
+      inputJson = JSON.parse(userInput); // Attempt to parse user input as JSON
     } catch (error) {
-      throw new Error('Invalid JSON input');
+      throw new Error('Invalid JSON input'); // Throw error if JSON parsing fails
     }
 
-    // Constructing the git_info object
+    // Constructing the git_info object with workflow and repo info
     const gitInfo = {
-      workflow: github.context.workflow, // Name of the current workflow
-      repo: github.context.repo.repo, // Name of the repository
+      workflow: github.context.workflow, // Fetching the name of the current workflow
+      repo: github.context.repo.repo, // Fetching the name of the repository
     };
 
     // Constructing the body of the data to be sent
     const body = {
-      git_info: gitInfo,
-      input: inputJson,
+      git_info: gitInfo, // Including git_info in the body
+      input: inputJson, // Including parsed user input in the body
     };
 
     // Sending data to the specified URL using a POST request
     const response = await axios.post(url, body);
 
-    // Optionally, additional validation of the response can be done here
+    // Checking if the actual response code matches the expected response code
+    if (response.status.toString() !== expectedResponseCode) {
+      // Throwing an error if the response codes don't match
+      throw new Error(
+        `Expected response code ${expectedResponseCode}, but got ${response.status}`
+      );
+    }
 
-    // Setting the 'success' output parameter to true
+    // Setting the 'success' output parameter to true if all goes well
     core.setOutput('success', true);
   } catch (error) {
     // If any error occurs, mark the action as failed and log the error message
